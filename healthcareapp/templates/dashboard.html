@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Include Bootstrap CSS from CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <h2>Welcome to Your Dashboard, {{ user.username }}</h2>
+                {% if user.profile_picture %}
+                <img src="{{ user.profile_picture.url }}" alt="Profile Picture" class="rounded-circle" width="130" height="130">
+            {% else %}
+                <p>No profile picture available.</p>
+            {% endif %}
+                <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Address:</strong> {{ user.address_line1 }}, {{ user.city }}, {{ user.state }} - {{ user.pincode }}</p>
+                <p><strong>User type</strong> {{ user.user_type }}</p>
+             
+                {% if user.user_type == 'doctor' %}
+                <!-- Display patient information here -->
+                <h3>Patient information</h3>
+                {% for patient in patients %}
+                    <p><strong>Patient Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+                    <p><strong>Patient Address:</strong> {{ patient.address_line1 }}, {{ patient.city }}, {{ patient.state }} - {{ patient.pincode }}</p>
+                    <!-- Display other patient details -->
+                {% endfor %}
+            {% endif %}
+            
+
+                <!-- Add more user details here -->
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+    <!-- Include Bootstrap JS from CDN (optional, at the end of the body) -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}
