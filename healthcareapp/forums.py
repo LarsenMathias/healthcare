@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser
+from .models import CustomUser,BlogPost
 
 class CustomUserCreationForm(UserCreationForm):
     profile_picture = forms.ImageField(required=False)
@@ -20,3 +20,7 @@ class CustomUserCreationForm(UserCreationForm):
 
         fields = ('username', 'first_name', 'last_name', 'email', 'profile_picture',
                   'address_line1', 'city', 'state', 'pincode', 'password1', 'password2','user_type')
+class Blogpostform(forms.ModelForm):
+    class Meta:
+        model=BlogPost
+        fields=['title','Image','content','Summary','Category','draft']

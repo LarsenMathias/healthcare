@@ -1,0 +1,99 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles.css' %}"> 
+    <title>{{ post.title }}</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'dashboard' %}">Home</a></li>
+                <li><a href="{% url 'blogpost' %}">Blog</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="post-container">
+        <div class="post-image">
+            <img src="{{ post.Image.url }}" alt="{{ post.title }}">
+        </div>
+        <div class="post-content">
+            <h1>{{ post.title }}</h1>
+            <div class="post-meta">
+                <span class="category">#{{ post.Category }}</span>
+            </div>
+            <p class="summary">{{ post.Summary }}</p>
+            <div class="post-text">
+
+                {{ post.content | safe }}
+            </div>
+            <p class="summary"><h6>Written by</h6> {{ post.author }}</p>
+            <div class="post-text">
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}
+<style>/* styles.css */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    
+    header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+    }
+    
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    nav ul li {
+        display: inline;
+        margin-right: 20px;
+    }
+    
+    .post-container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+    
+    .post-image img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .post-content {
+        padding: 20px;
+    }
+    
+    .post-meta {
+        font-size: 14px;
+        color: #777;
+    }
+    
+    .summary {
+        font-size: 18px;
+        margin-top: 10px;
+        color: #333;
+    }
+    
+    .post-text {
+        font-size: 16px;
+        line-height: 1.6;
+        margin-top: 20px;
+    }
+    </style>

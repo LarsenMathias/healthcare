@@ -30,6 +30,7 @@
                 <h3>Patient information</h3>
                 {% for patient in patients %}
                     <p><strong>Patient Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+                   <p><h4>Patient email </h4>{{ patient.email }}</p>
                     <p><strong>Patient Address:</strong> {{ patient.address_line1 }}, {{ patient.city }}, {{ patient.state }} - {{ patient.pincode }}</p>
                     <!-- Display other patient details -->
                 {% endfor %}
